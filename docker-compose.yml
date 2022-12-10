@@ -1,0 +1,12 @@
+version: "3.7"
+services:
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_DB: ${DATABASE_NAME}
+      MYSQL_USER: ${DATABASE_USERNAME}
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - ./.data/pgdata:/var/lib/mysql/data
+    ports:
+      - "8080:8080"
