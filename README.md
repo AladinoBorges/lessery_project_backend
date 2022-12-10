@@ -12,7 +12,6 @@ Esse projeto foi desenvolvido numa máquina que usa como sistema operativo o Win
 * Version Control: [GitHub](https://github.com/AladinoBorges/lessery_project)
 * Code Runner: [CodeRunner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner)
 * Virtual Environment: [Pipenv](https://pipenv.pypa.io/en/latest/#install-pipenv-today)
-* Development Environment: [Docker](https://www.docker.com/get-started)
 * Task | Job Queue Manager: [Celery](https://docs.celeryq.dev/en/stable)
 * Package Manager | Installer: [Pip](https://pypi.org/project/pip)
 * Database Image: [Imagem Docker MySQL](https://hub.docker.com/_/mysql)
@@ -21,6 +20,7 @@ Esse projeto foi desenvolvido numa máquina que usa como sistema operativo o Win
 * ORM (Object Relational Mapper): [SQLAlchemy](https://www.sqlalchemy.org)
 * Environment Variables File Reader: [python-dotenv](https://pypi.org/project/python-dotenv)
 * Database Design and Management: [MySQL Workbench](https://dev.mysql.com/doc/workbench/en)
+* Development Environment: [Docker](https://www.docker.com/get-started) e [Docker Compose](https://docs.docker.com/get-started/08_using_compose)
   
 ## Instruções para rodar a aplicação backend.
 
