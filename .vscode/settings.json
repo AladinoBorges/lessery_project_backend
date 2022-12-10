@@ -1,0 +1,21 @@
+{
+  "python.linting.enabled": true,
+  "python.linting.flake8Enabled": true,
+  "python.formatting.blackArgs": ["-l 79"],
+  "python.formatting.provider": "black",
+
+   "code-runner.executorMap": {
+      "python": "py -u"
+    },
+    "code-runner.runInTerminal": true,
+    "python.analysis.extraPaths": [
+      "./sources"
+    ],
+    "cSpell.words": [
+      "fastapi",
+      "pipenv",
+      "Pipfile",
+      "pydantic",
+      "uvicorn"
+    ]
+}
