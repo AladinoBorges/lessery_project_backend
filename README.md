@@ -3,7 +3,9 @@
 
 Esse projeto foi desenvolvido numa máquina que usa como sistema operativo o Windows 10. Por este motivo, todos os comandos do terminal e/ou o powershell são os usados pelo sistema operativo. Caso uses outro sistema, pesquise pelos comandos equivalentes para o seu caso (uma pessoa desenvolvedora precisa de cultivar o hábito da pesquisa, não é mesmo?).
 
-***Nota, todos os comandos usam o terminal do windows, com os perfis powershell ou git bash. Por uma questão de conveniência e para que a aplicação "automagicamente" funcione em qualquer sistema operativo, toda a aplicação foi desenvolvida em docker, desse modo, basta criar as imagens e containers para que a mesma funcione independentemente do sistema operativo utilizado.***
+***Nota: todos os comandos usam o terminal do windows, com os perfis powershell ou git bash.***
+
+***Por uma questão de conveniência e para que a aplicação "automagicamente" funcione em qualquer sistema operativo, toda a aplicação foi desenvolvida em docker, desse modo, basta criar as imagens e containers para que a mesma funcione independentemente do sistema operativo utilizado.***
 
 ## Pré-requisitos:
 * Tests: [PyTest](https://docs.pytest.org)
@@ -44,4 +46,4 @@ Esse projeto foi desenvolvido numa máquina que usa como sistema operativo o Win
   * ```pipenv run composer:up``` 
 
 
-***Nota: não é necessário rodar a aplicação backend pois a mesma é instanciada no docker, e todas as alterações efetuadas no código são automaticamente atualizados na aplicação contentorizada.***
+***Nota: não é necessário rodar a aplicação backend pois a mesma é instanciada no docker, e todas as alterações efetuadas no código são automaticamente atualizadas na aplicação contentorizada.***
