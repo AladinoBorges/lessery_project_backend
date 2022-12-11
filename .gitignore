@@ -142,4 +142,7 @@ dmypy.json
 # pipenv
 Pipfile.lock
 
+# docker database data
+.data
+
 # End of https://www.toptal.com/developers/gitignore/api/python

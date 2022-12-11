@@ -1,8 +1,8 @@
 from fastapi import Depends, FastAPI
 
-from classes.DefaultResponse import DefaultResponse
-from classes.SettingsClass import SettingsClass
-from utils.config import get_settings
+from src.classes.DefaultResponse import DefaultResponse
+from src.classes.SettingsClass import SettingsClass
+from src.utils.config import get_settings
 
 app = FastAPI()
 

@@ -1,6 +1,6 @@
 FROM python:3.11.1-slim-bullseye
 
-WORKDIR /usr/src/app
+WORKDIR /usr/src/api
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
