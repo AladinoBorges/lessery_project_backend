@@ -30,10 +30,12 @@ Esse projeto foi desenvolvido numa máquina que usa como sistema operativo o Win
   * ```git clone https://gitlab.com/hh_engineering/backend.git```
 
 2. Execute os seguintes comandos pela ordem que aparecem para instalar todas as dependências do projeto presentes no arquivo Pipfile e inicializar o ambiente de dependências isolado (git bash):
-  * ```py -m pip install pipenv```; ```py -m pipenv shell``` e ```pipenv install --dev```
+  * ```py -m pip install pipenv```;
+  * ```py -m pipenv shell```;
+  * ```pipenv install --dev```
 
 3. Iniciar o docker digitando o seguinte comando no terminal (powershell):
-  ```Start-service docker```
+  * ```Start-service docker```
 
 4. Crie a imagem para o docker usando o comando (git bash):
   * ```docker-compose build```
