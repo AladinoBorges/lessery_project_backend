@@ -17,5 +17,6 @@ pytest-json = "*"
 python_version = "3.11"
 
 [scripts]
-dev = "uvicorn app.main:app --reload"
-start = "uvicorn app.main:app"
+dev = "uvicorn src.api.main:app --reload"
+start = "uvicorn src.api.main:app"
+build = "docker-compose up --build -d"
