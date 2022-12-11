@@ -29,20 +29,20 @@ Esse projeto foi desenvolvido numa máquina que usa como sistema operativo o Win
 1. Cole e execute no terminal o seguinte comando para clonar o repositório que contém o código (git bash):
 ```git clone https://gitlab.com/hh_engineering/backend.git```
 
-2. Execute o comando para instalar todas as dependências do projeto presentes no arquivo Pipfile (git bash):
-```pipenv install```
-
-3. Execute o comando para ativar o virtual env do projeto (git bash):
-```pipenv shell```
+2. Execute os seguintes comandos pela ordem que aparecem para instalar todas as dependências do projeto presentes no arquivo Pipfile e inicializar o ambiente de dependências isolado (git bash):
+```py -m pip install pipenv```; ```py -m pipenv shell``` e ```pipenv install --dev```
 
 3. Iniciar o docker digitando o seguinte comando no terminal (powershell):
 ```Start-service docker```
 
-4. No repositório clonado, baixar a imagem MySQL (git bash):
-```docker pull mysql```
+4. Crie a imagem para o docker usando o comando (git bash):
+```docker-compose build```
 
-5. Executar o container Docker para a conexão com o banco de dados (git bash): 
+5. Crie o container para o docker usando o seguinte comando (git bash):
+```docker-compose up -d``` 
+
+?6. Executar o container Docker para a conexão com o banco de dados (git bash): 
 ```docker run -p 8080:8080 -e MYSQL_PASSWORD=a_sua_senha_do_banco_de_dados mysql```
 
-6. Utilizando um terminal a parte (ainda no repositório clonado) solicitar a conexão do banco de dados ao docker:
+?7. Utilizando um terminal a parte (ainda no repositório clonado) solicitar a conexão do banco de dados ao docker:
  ```pipenv run dev```
