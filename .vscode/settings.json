@@ -14,9 +14,13 @@
     "cSpell.words": [
       "fastapi",
       "LESSERY",
+      "nullable",
       "pipenv",
       "Pipfile",
       "pydantic",
+      "sessionmaker",
+      "sqlalchemy",
+      "sqlite",
       "uvicorn"
     ]
 }
