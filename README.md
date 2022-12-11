@@ -3,7 +3,7 @@
 
 Esse projeto foi desenvolvido numa máquina que usa como sistema operativo o Windows 10. Por este motivo, todos os comandos do terminal e/ou o powershell são os usados pelo sistema operativo. Caso uses outro sistema, pesquise pelos comandos equivalentes para o seu caso (uma pessoa desenvolvedora precisa de cultivar o hábito da pesquisa, não é mesmo?).
 
-***Nota, todos os comandos usam o terminal do windows, com os perfis powershell ou git bash.***
+***Nota, todos os comandos usam o terminal do windows, com os perfis powershell ou git bash. Por uma questão de conveniência e para que a aplicação "automagicamente" funcione em qualquer sistema operativo, toda a aplicação foi desenvolvida em docker, desse modo, basta criar as imagens e containers para que a mesma funcione independentemente do sistema operativo utilizado.***
 
 ## Pré-requisitos:
 * Tests: [PyTest](https://docs.pytest.org)
@@ -37,14 +37,11 @@ Esse projeto foi desenvolvido numa máquina que usa como sistema operativo o Win
 3. Iniciar o docker digitando o seguinte comando no terminal (powershell):
   * ```Start-service docker```
 
-4. Crie a imagem para o docker usando o comando (git bash):
-  * ```docker-compose build```
+4. Execute o seguinte comando para configurar todo o docker (aplicação contentorizada, banco de dados mysql e rodar todos os containers necessários automaticamente) (git bash):
+  * ```pipenv run composer:build```
 
-5. Crie o container para o docker usando o seguinte comando (git bash):
-  * ```docker-compose up -d``` 
+5. Caso a aplicação contentorizada não rode automaticamente na porta 8004, execute o seguinte comando (git bash):
+  * ```pipenv run composer:up``` 
 
-?6. Executar o container Docker para a conexão com o banco de dados (git bash): 
-  * ```docker run -p 8080:8080 -e MYSQL_PASSWORD=a_sua_senha_do_banco_de_dados mysql```
 
-?7. Utilizando um terminal a parte (ainda no repositório clonado) solicitar a conexão do banco de dados ao docker:
-  * ```pipenv run dev```
+***Nota: não é necessário rodar a aplicação backend pois a mesma é instanciada no docker, e todas as alterações efetuadas no código são automaticamente atualizados na aplicação contentorizada.***
