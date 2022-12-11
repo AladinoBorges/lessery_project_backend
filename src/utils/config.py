@@ -16,6 +16,10 @@ def shutdown_event() -> None:
     log.info("[LESSERY] - Closing the application ...")
 
 
+def database_connection_logger() -> None:
+    log.info("[LESSERY] - Connecting to database ...")
+
+
 @lru_cache
 def get_settings() -> BaseSettings:
     log.info("[LESSERY] - Loading config settings from environment ...")
