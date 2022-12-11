@@ -22,11 +22,11 @@ Esse projeto foi desenvolvido numa máquina que usa como sistema operativo o Win
 * ORM (Object Relational Mapper): [SQLAlchemy](https://www.sqlalchemy.org)
 * Environment Variables File Reader: [python-dotenv](https://pypi.org/project/python-dotenv)
 * Development Environment: [Docker](https://www.docker.com/get-started) e [Docker Compose](https://docs.docker.com/get-started/08_using_compose)
-* Database Design and Management: [MySQL Workbench](https://dev.mysql.com/doc/workbench/en)
+* Database Design and Management: [MySQL Workbench](https://dev.mysql.com/doc/workbench/en) e [MySQL Server](https://dev.mysql.com/doc/refman/8.0/en) ou [DBeaver](https://dbeaver.io)
   
 ## Instruções para rodar a aplicação backend.
 
-***Atenção: toda a estrutura do backend está contentorizada no Docker, por isso será necessário instalá-lo juntamente com todos os pré-requisitos antes de clonar esse repositório. O MySQL Workbench é usado apenas para ter uma interface visual para a gestão e modelagem do banco de dados. Poderão ser usadas alternativas como [DBeaver](https://dbeaver.io/) por exemplo.***
+***Atenção: toda a estrutura do backend está contentorizada no Docker, por isso será necessário instalá-lo juntamente com todos os pré-requisitos antes de clonar esse repositório. O MySQL Workbench é usado apenas para ter uma interface visual para a gestão e modelagem do banco de dados. Poderão ser usadas alternativas como [DBeaver](https://dbeaver.io) por exemplo.***
 
 1. Cole e execute no terminal o seguinte comando para clonar o repositório que contém o código (git bash):
   * ```git clone https://gitlab.com/hh_engineering/backend.git```
