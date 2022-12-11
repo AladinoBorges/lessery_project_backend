@@ -3,15 +3,18 @@ class DefaultResponse:
         self,
         status: int,
         message: str,
+        app_version: str,
         environment: str,
         testing: bool,
         data: any = None,
     ) -> dict[str, int | bool | str | None | dict | list]:
         self.success = {
-            "status": status,
-            "error": False,
-            "message": message,
+            "status": {"code": status, "error": False, "message": message},
             "data": data,
-            "environment": environment,
-            "testing": testing,
+            "api_info": {
+                "version": app_version,
+                "environment": environment,
+                "testing": testing,
+                "developers": ["@aladinoborges"],
+            },
         }
