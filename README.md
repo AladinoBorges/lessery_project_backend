@@ -13,16 +13,16 @@ Esse projeto foi desenvolvido numa máquina que usa como sistema operativo o Win
 * Code Formatter: [Black](https://pypi.org/project/black)
 * Version Control: [GitHub](https://github.com/AladinoBorges/lessery_project)
 * Code Runner: [CodeRunner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner)
-* Virtual Environment: [Pipenv](https://pipenv.pypa.io/en/latest/#install-pipenv-today)
 * Task | Job Queue Manager: [Celery](https://docs.celeryq.dev/en/stable)
+* Virtual Environment: [Pipenv](https://pipenv.pypa.io/en/latest/#install-pipenv-today)
 * Package Manager | Installer: [Pip](https://pypi.org/project/pip)
 * Database Image: [Imagem Docker MySQL](https://hub.docker.com/_/mysql)
 * Code Style Guide Enforcement: [Flake8](https://pypi.org/project/flake8)
 * Programming Language: [Python (>=3.11.1)](https://www.python.org/downloads/release/python-3111)
 * ORM (Object Relational Mapper): [SQLAlchemy](https://www.sqlalchemy.org)
 * Environment Variables File Reader: [python-dotenv](https://pypi.org/project/python-dotenv)
-* Database Design and Management: [MySQL Workbench](https://dev.mysql.com/doc/workbench/en)
 * Development Environment: [Docker](https://www.docker.com/get-started) e [Docker Compose](https://docs.docker.com/get-started/08_using_compose)
+* Database Design and Management: [MySQL Workbench](https://dev.mysql.com/doc/workbench/en)
   
 ## Instruções para rodar a aplicação backend.
 
