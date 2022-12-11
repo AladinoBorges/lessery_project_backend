@@ -3,7 +3,7 @@ from functools import lru_cache
 
 from pydantic import BaseSettings
 
-from classes.SettingsClass import SettingsClass
+from src.classes.SettingsClass import SettingsClass
 
 log = logging.getLogger("uvicorn")
 
