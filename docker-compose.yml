@@ -1,12 +1,13 @@
-version: "3.7"
+version: "3.8"
+
 services:
-  db:
-    image: mysql:latest
-    environment:
-      MYSQL_DB: ${DATABASE_NAME}
-      MYSQL_USER: ${DATABASE_USERNAME}
-      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+  web:
+    build: ./backend
+    command: uvicorn app.main:app --reload --workers --host 0.0.0.0 --port 8000
     volumes:
-      - ./.data/pgdata:/var/lib/mysql/data
+      - ./backend:/usr/src/app
     ports:
-      - "8080:8080"
+      - "8004:8000"
+    environment:
+      - ENVIRONMENT=dev
+      - TESTING=0
