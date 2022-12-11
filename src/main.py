@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 
 from src.api import status
+from src.orm.session import global_initializer
 from src.utils.config import shutdown_event, startup_event
 
 
@@ -17,6 +18,8 @@ app: FastAPI = create_application()
 @app.on_event("startup")
 async def generate_startup_log() -> None:
     startup_event()
+
+    global_initializer()
 
 
 @app.on_event("shutdown")
