@@ -10,7 +10,7 @@ class ProductBaseSchema(BaseSchema):
 
 
 class ProductCreateSchema(ProductBaseSchema):
-    owner_id: BigInteger
+    pass
 
 
 class ProductReadSchema(ProductBaseSchema):
