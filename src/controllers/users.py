@@ -23,7 +23,10 @@ def generate_hashed_password(
 
 # ! Create
 def create_user(database: Session, user: UserCreateSchema) -> UserReadSchema:
-    hashed_password: str = user.password
+    hashed_password: str = generate_hashed_password(
+        user.password,
+    )
+
     new_user: UserReadSchema = UserModel(
         email=user.email, hashed_password=hashed_password
     )
