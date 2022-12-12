@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 from src.connections.engine import Base
 
 
-class Product(Base):
+class ProductModel(Base):
     __tablename__ = "products"
 
     id = Column(BigInteger, primary_key=True, autoincrement=True, index=True)
