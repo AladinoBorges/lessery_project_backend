@@ -7,8 +7,7 @@ name = "pypi"
 fastapi = "*"
 uvicorn = {extras = ["standard"], version = "*"}
 sqlalchemy = "*"
-mysqlclient = "*"
-mysql-connector-python = "*"
+pymysql = "*"
 
 [dev-packages]
 black = "*"
