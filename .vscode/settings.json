@@ -12,6 +12,7 @@
       "./sources"
     ],
     "cSpell.words": [
+      "autoflush",
       "fastapi",
       "LESSERY",
       "mysql",
