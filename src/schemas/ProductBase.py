@@ -6,17 +6,17 @@ class ProductBaseSchema(BaseSchema):
     code: str
     name: str
     description: str
-    owner_id: BigInteger
-    prices: list[float]
+    price: float
 
 
 class ProductCreateSchema(ProductBaseSchema):
-    pass
+    owner_id: BigInteger
 
 
 class ProductReadSchema(ProductBaseSchema):
     id: BigInteger
     owner_id: BigInteger
+    price_history: list[float]
 
     class Config:
         orm_mode: bool = True
