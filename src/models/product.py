@@ -1,4 +1,4 @@
-from sqlalchemy import ARRAY, BigInteger, Column, ForeignKey, String
+from sqlalchemy import ARRAY, BigInteger, Column, Float, ForeignKey, String
 from sqlalchemy.orm import relationship
 
 from src.connections.engine import Base
@@ -11,8 +11,9 @@ class ProductModel(Base):
 
     code = Column(String(200), nullable=False, index=True)
     name = Column(String(400), nullable=False, index=True)
+    price = Column(Float, nullable=False, index=True)
     description = Column(String(2000), nullable=False, index=True)
     owner_id = Column(BigInteger, ForeignKey("users.id"))
-    prices = Column(ARRAY(BigInteger), nullable=True, index=True)
+    price_history = Column(ARRAY(BigInteger), nullable=True, index=True)
 
     owner = relationship("User", back_populates="products")
