@@ -4,16 +4,19 @@ services:
   # backend api
   api:
     build: .
-    command: uvicorn src.api.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
+    command: uvicorn src.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
     volumes:
       - .:/usr/src/api
     ports:
       - "8004:8000"
+    env_file:
+      - .env
     environment:
-      - ENVIRONMENT=dev
-      - TESTING=0
+      ENVIRONMENT: ${ENVIRONMENT}
+      TESTING: ${TESTING}
     depends_on:
       - database
+
   # application database
   database:
     image: mysql:8.0
@@ -22,10 +25,10 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: ${DATABASE_NAME}
-      MYSQL_USER: ${DATABASE_USERNAME}
-      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${SQL_DATABASE}
+      MYSQL_USER: ${SQL_USER}
+      MYSQL_PASSWORD: ${SQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${SQL_ROOT_PASSWORD}
     ports:
       - "3306:3306"
 
