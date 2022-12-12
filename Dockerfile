@@ -12,9 +12,3 @@ COPY ../Pipfile.lock .
 RUN pipenv install --deploy --system
 
 COPY . .
-
-# entrypoint
-COPY ./local-entrypoint.sh /usr/src/api/local-entrypoint.sh
-RUN chmod +x /usr/src/api/local-entrypoint.sh
-
-CMD ["/bin/bash", "-c", "./local-entrypoint.sh"]

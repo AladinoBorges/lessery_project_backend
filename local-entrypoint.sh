@@ -7,12 +7,29 @@ set -o pipefail
 set -o nounset
 
 mysql_ready() {
-python << END import sys import mysql.connector from mysql.connector import Error try: connection = mysql.connector.connect(host="${SQL_HOST}", database="${SQL_DATABASE}", user="${SQL_USER}", password="${SQL_PASSWORD}") except: sys.exit(-1) sys.exit(0) END
+python << END
+
+import sys
+
+import pymysql.cursors
+
+try:
+    connection = pymysql.connect(host="${SQL_HOST}",
+                                user="${SQL_USER}",
+                                password="${SQL_PASSWORD}",
+                                database="${SQL_DATABASE}",
+                                cursorclass=pymysql.cursors.DictCursor)
+except:
+    sys.exit(-1)
+sys.exit(0)
+
+END
 }
+
 until mysql_ready; do
-  >&2 echo 'Waiting for Mysql to become available...'
+  >&2 echo '[LESSERY] - Waiting for Mysql to become available...'
   sleep 1
 done
->&2 echo 'Mysql is available'
+>&2 echo '[LESSERY] - Mysql is available'
 
 uvicorn src.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
