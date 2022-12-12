@@ -28,7 +28,10 @@ def create_user(database: Session, user: UserCreateSchema) -> UserReadSchema:
     )
 
     new_user: UserReadSchema = UserModel(
-        email=user.email, hashed_password=hashed_password
+        name=user.name,
+        last_name=user.last_name,
+        email=user.email,
+        password=hashed_password,
     )
 
     database.add(new_user)
