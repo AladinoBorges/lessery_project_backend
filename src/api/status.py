@@ -33,6 +33,7 @@ async def not_found(
     response = DefaultResponse(
         404,
         "ups! i did it again, 404.",
+        settings.version,
         settings.environment,
         settings.testing,
     )
