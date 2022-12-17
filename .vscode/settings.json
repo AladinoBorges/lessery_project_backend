@@ -15,6 +15,7 @@
       "autoflush",
       "fastapi",
       "LESSERY",
+      "middlewares",
       "mysql",
       "nullable",
       "pipenv",
