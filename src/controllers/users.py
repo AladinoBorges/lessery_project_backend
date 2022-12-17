@@ -1,73 +1,43 @@
 from sqlalchemy import BigInteger
-from sqlalchemy.orm import Session
 
-from src.models.user import UserModel
 from src.schemas.UserBase import UserCreateSchema, UserReadSchema
-
-"""
-    write an util that receives as parameter a unencrypted password and
-    returns an encrypted (hashed) string.
-"""
-
-# TODO: UTILS START
+from src.services.users import UsersService
 
 
-def generate_hashed_password(
-    password: str, encryption_algorithm: str = "SHA256"
-) -> str | None:
-    return None
+class UsersController:
+    def create(user: UserCreateSchema) -> UserReadSchema:
+        new_user: UserReadSchema = UsersService.create(user)
+
+        return new_user
+
+    def find_by_id(user_id: BigInteger) -> UserReadSchema:
+        user: UserReadSchema = UsersService.find_by_id(user_id)
+
+        return user
+
+    def find_by_email(user_email: str) -> UserReadSchema:
+        user: UserReadSchema = UsersService.find_by_email(user_email)
+
+        return user
+
+    def find_all(skip: int, limit: int) -> list[UserReadSchema]:
+        users: UserReadSchema = UsersService.find_by_email(skip, limit)
+
+        return users
+
+    """
+    def update_user(
+      user_id: BigInteger, data: UpdateUserSchema
+    ) -> UserReadSchema:
+        user = UsersService.update(user_id, data)
+
+        return user
 
 
-# TODO: UTILS END
+    def delete_user(
+      user_id: BigInteger, is_active: bool
+    ) -> UserDeleteSchema:
+        user = UsersService.delete(user_id, active_status)
 
-
-# ! Create
-def create_user(database: Session, user: UserCreateSchema) -> UserReadSchema:
-    hashed_password: str = generate_hashed_password(
-        user.password,
-    )
-
-    new_user: UserReadSchema = UserModel(
-        name=user.name,
-        last_name=user.last_name,
-        email=user.email,
-        password=hashed_password,
-    )
-
-    database.add(new_user)
-    database.commit()
-    database.refresh(new_user)
-
-    return new_user
-
-
-# ! Read
-def get_user(database: Session, user_id: BigInteger) -> UserReadSchema:
-    query_result: UserReadSchema = (
-        database.query(UserModel).filter(UserModel.id == user_id).first()
-    )
-
-    return query_result
-
-
-def get_user_by_email(database: Session, user_email: str) -> UserReadSchema:
-    query_result: UserReadSchema = (
-        database.query(UserModel).filter(UserModel.email == user_email).first()
-    )
-
-    return query_result
-
-
-def get_users(
-    database: Session, skip: int = 0, limit: int = 30
-) -> list[UserReadSchema]:
-    query_result: list[UserReadSchema] = (
-        database.query(UserModel).offset(skip).limit(limit).all()
-    )
-
-    return query_result
-
-
-# ! Update
-
-# ! Delete
+        return user
+    """
