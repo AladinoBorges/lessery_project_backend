@@ -1,39 +1,61 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, HTTPException
+from sqlalchemy import BigInteger
 
-from src.classes.DefaultResponse import DefaultResponse
-from src.classes.SettingsClass import SettingsClass
-from src.connections.engine import LocalSession
-from src.utils.config import get_settings
+from src.controllers.users import (
+    create_user,
+    get_user,
+    get_user_by_email,
+    get_users,
+)
+from src.schemas.UserBase import UserCreateSchema, UserReadSchema
+from src.utils.errors.handlers import http_exceptions
 
 router = APIRouter()
 
 
-def settings_data() -> SettingsClass:
-    return Depends(get_settings)
+@router.post("/users", response_model=UserReadSchema)
+def create_new_user(
+    user_data: UserCreateSchema,
+) -> UserReadSchema | HTTPException:
+    error_status_code = 400
+    error_message: str = "User already registered."
+
+    user_already_registered = get_user_by_email(user_data.email)
+
+    if user_already_registered:
+        http_exceptions(error_message, error_status_code)
+
+    new_user = create_user(user_data)
+
+    return new_user
 
 
-def get_database():
-    database = LocalSession()
+@router.get("/users", response_model=UserReadSchema)
+def get_all_users(
+    skip: int = 0,
+    limit: int = 13,
+) -> UserReadSchema | HTTPException:
+    error_status_code = 404
+    error_message: str = "No users found."
 
-    try:
-        yield database
-    finally:
-        database.close()
+    users = get_users(skip, limit)
+
+    if users is None:
+        http_exceptions(error_message, error_status_code)
+
+    return users
 
 
-@router.get("/users")
-async def get_users(
-    settings: SettingsClass = settings_data(), database=Depends(get_database)
-):
-    users = database
+@router.get("/users/{user_id}", response_model=UserReadSchema)
+def get_user_by_id(
+    user_id: BigInteger,
+) -> UserReadSchema | HTTPException:
+    error_status_code = 404
+    error_message: str = "User not found."
 
-    response = DefaultResponse(
-        200,
-        "users data",
-        settings.version,
-        settings.environment,
-        settings.testing,
-        users,
-    )
+    user = get_user(user_id)
 
-    return response.success
+    if user is None:
+        http_exceptions(error_message, error_status_code)
+
+    return user
