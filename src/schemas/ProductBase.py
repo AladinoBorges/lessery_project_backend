@@ -7,6 +7,8 @@ class ProductBaseSchema(BaseSchema):
     name: str
     description: str
     price: float
+    shop_name: str
+    affiliate_url: str
 
 
 class ProductCreateSchema(ProductBaseSchema):
