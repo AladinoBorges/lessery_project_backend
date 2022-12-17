@@ -1,31 +1,17 @@
 from fastapi import APIRouter, HTTPException
 from sqlalchemy import BigInteger
 
-from src.controllers.users import (
-    create_user,
-    get_user,
-    get_user_by_email,
-    get_users,
-)
+from src.middlewares.users import UsersMiddleware
 from src.schemas.UserBase import UserCreateSchema, UserReadSchema
-from src.utils.errors.handlers import http_exceptions
 
 router = APIRouter()
 
 
 @router.post("/users", response_model=UserReadSchema)
-def create_new_user(
+def create(
     user_data: UserCreateSchema,
 ) -> UserReadSchema | HTTPException:
-    error_status_code = 400
-    error_message: str = "User already registered."
-
-    user_already_registered = get_user_by_email(user_data.email)
-
-    if user_already_registered:
-        http_exceptions(error_message, error_status_code)
-
-    new_user = create_user(user_data)
+    new_user = UsersMiddleware.create(user_data)
 
     return new_user
 
@@ -35,13 +21,7 @@ def get_all_users(
     skip: int = 0,
     limit: int = 13,
 ) -> UserReadSchema | HTTPException:
-    error_status_code = 404
-    error_message: str = "No users found."
-
-    users = get_users(skip, limit)
-
-    if users is None:
-        http_exceptions(error_message, error_status_code)
+    users = UsersMiddleware.find_all(skip, limit)
 
     return users
 
@@ -50,12 +30,7 @@ def get_all_users(
 def get_user_by_id(
     user_id: BigInteger,
 ) -> UserReadSchema | HTTPException:
-    error_status_code = 404
-    error_message: str = "User not found."
 
-    user = get_user(user_id)
-
-    if user is None:
-        http_exceptions(error_message, error_status_code)
+    user = UsersMiddleware.find_by_id(user_id)
 
     return user
