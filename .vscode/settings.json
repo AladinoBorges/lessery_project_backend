@@ -22,6 +22,8 @@
       "pydantic",
       "pymysql",
       "sessionmaker",
+      "shopee",
+      "Shopee",
       "sqlalchemy",
       "sqlite",
       "uvicorn"
