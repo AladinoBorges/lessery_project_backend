@@ -1,5 +1,5 @@
 from fastapi import HTTPException
-from sqlalchemy import BigInteger
+from sqlalchemy.orm import Session
 
 from src.controllers.users import UsersController
 from src.schemas.UserBase import UserCreateSchema, UserReadSchema
@@ -23,23 +23,25 @@ class UsersMiddleware:
         return new_user
 
     def find_all(
-        skip: int = 0, limit: int = 13
+        skip: int, limit: int, database: Session
     ) -> UserReadSchema | HTTPException:
         error_status_code = 404
         error_message: str = "No users found."
 
-        users = UsersController.find_all(skip, limit)
+        users = UsersController.find_all(skip, limit, database)
 
         if users is None or len(users) == 0:
             http_exceptions(error_message, error_status_code)
 
         return users
 
-    def find_by_id(user_id: BigInteger) -> UserReadSchema | HTTPException:
+    def find_by_id(
+        user_id: int, database: Session
+    ) -> UserReadSchema | HTTPException:
         error_status_code = 404
         error_message: str = "User not found."
 
-        user = UsersController.find_by_id(user_id)
+        user = UsersController.find_by_id(user_id, database)
 
         if user is None:
             http_exceptions(error_message, error_status_code)
