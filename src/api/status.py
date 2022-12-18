@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 
 from src.classes.DefaultResponse import DefaultResponse
 from src.classes.SettingsClass import SettingsClass
-from src.utils.configurations.logging import get_settings
+from src.utilities.logs.handlers import get_settings
 
 status_router = APIRouter(tags=["API Status"], prefix="/api/v1/status")
 
