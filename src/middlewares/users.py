@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 from src.controllers.users import UsersController
 from src.schemas.UserBase import UserCreateSchema, UserReadSchema
-from src.utils.errors.handlers import http_exceptions
+from src.utilities.errors.handlers import http_exceptions
 
 
 class UsersMiddleware:
