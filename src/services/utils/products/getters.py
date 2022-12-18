@@ -1,4 +1,5 @@
-from src.classes.ExternalAPIS import AmazonAPI, ShopeeAPI
+from src.routers.external.amazon import AmazonAPI
+from src.routers.external.shopee import ShopeeAPI
 from src.schemas.ProductBase import ProductBaseSchema
 
 """
