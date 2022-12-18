@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 
-from src.api.users import users_router
 from src.connections.engine import engine
 from src.models.base import Base
 from src.routers.ApiStatus import ApiStatus
+from src.routers.Users import UsersRouter
 from src.utilities.logs.handlers import LogsHandlers
 
 
@@ -12,7 +12,7 @@ def create_application() -> FastAPI:
 
     application = FastAPI()
 
-    application.include_router(users_router)
+    application.include_router(UsersRouter.router)
     application.include_router(ApiStatus.router)
 
     return application
