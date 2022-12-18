@@ -4,6 +4,9 @@
 │   ├── connections: database engine
 │   │   ├── __init__.py
 │   │   └── engine.py
+│   ├── helpers: D.R.Y functions 
+│   │   ├── __init__.py
+│   │   └── ...
 │   ├── models: SQL Alchemy models for database modeling
 │   │   ├── __init__.py
 │   │   ├── Base.py
