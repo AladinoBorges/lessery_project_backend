@@ -7,7 +7,8 @@ class UserModel(Base):
     __tablename__ = "users"
 
     id = Column(BigInteger, primary_key=True, autoincrement=True)
-    is_active = Column(Boolean, default=True)
+    is_active = Column(Boolean, default=False)
+    verified = Column(Boolean, default=False)
 
     name = Column(String(30), nullable=False)
     last_name = Column(String(30), nullable=False)

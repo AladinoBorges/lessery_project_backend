@@ -1,20 +1,15 @@
+from src.utilities.errors.handlers import Exceptions
+
+
 class Default:
-    def unique(data, error_message: str, error_status_code: int):
+    def unique(data, message: str, code: int):
         if data is None:
-            return {
-                "error": True,
-                "status_code": error_status_code,
-                "message": error_message,
-            }
+            return Exceptions.http(message, code)
 
         return data
 
-    def multiple(data, error_message: str, error_status_code: int):
+    def multiple(data, message: str, code: int):
         if len(data) == 0:
-            return {
-                "error": True,
-                "status_code": error_status_code,
-                "message": error_message,
-            }
+            return Exceptions.http(message, code)
 
         return data

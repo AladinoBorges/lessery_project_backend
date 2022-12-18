@@ -9,7 +9,7 @@
 def generate_hashed_password(
     password: str, encryption_algorithm: str = "SHA256"
 ) -> str | None:
-    return None
+    return password + "hash256"
 
 
 # TODO: UTILS END

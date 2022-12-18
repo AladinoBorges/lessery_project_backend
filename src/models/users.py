@@ -1,16 +1,22 @@
 from sqlalchemy.orm import Session
 
 from src.models.user import UserModel
-from src.schemas.UserBase import UserCreateSchema, UserReadSchema
+from src.schemas.UserBase import (
+    UserBaseSchema,
+    UserCreateSchema,
+    UserReadSchema,
+)
 
 
 class UsersModel:
-    def create(user_data, database: Session) -> UserCreateSchema:
-        new_user: UserReadSchema = UserModel(
+    def create(
+        user_data: UserBaseSchema, password: str, database: Session
+    ) -> UserReadSchema:
+        new_user: UserCreateSchema = UserModel(
             name=user_data.name,
             last_name=user_data.last_name,
             email=user_data.email,
-            password=user_data.password,
+            password=password,
         )
 
         database.add(new_user)
@@ -22,7 +28,7 @@ class UsersModel:
     def find_all(
         skip: int, limit: int, database: Session
     ) -> list[UserReadSchema]:
-        users: UserReadSchema = (
+        users: list[UserReadSchema] = (
             database.query(UserModel).offset(skip).limit(limit).all()
         )
 
