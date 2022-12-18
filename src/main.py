@@ -4,7 +4,7 @@ from src.api.status import status_router
 from src.api.users import users_router
 from src.connections.engine import engine
 from src.models.base import Base
-from src.utils.configurations.logging import shutdown_event, startup_event
+from src.utilities.logs.handlers import shutdown_event, startup_event
 
 
 def create_application() -> FastAPI:
