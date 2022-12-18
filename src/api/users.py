@@ -8,7 +8,7 @@ from src.schemas.UserBase import (
     UserReadSchema,
     UsersReadSchema,
 )
-from src.utils.configurations.logging import database_connection_logger
+from src.utilities.logs.handlers import database_connection_logger
 
 
 def connect() -> None:
