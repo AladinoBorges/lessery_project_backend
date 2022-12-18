@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 
 from src.utilities.informative.Application import ApplicationInformation
-from src.utilities.logs.handlers import get_settings
+from src.utilities.logs.handlers import LogsHandlers
 
 
 class ApiStatus:
@@ -9,7 +9,9 @@ class ApiStatus:
 
     @router.get("/")
     def status(
-        defaultInfos: ApplicationInformation = Depends(get_settings),
+        defaultInfos: ApplicationInformation = Depends(
+            LogsHandlers.get_settings
+        ),
     ) -> dict[str, int | bool | str | None | dict | list]:
         return {
             "status": {
@@ -22,5 +24,5 @@ class ApiStatus:
                 "environment": defaultInfos.environment,
                 "testing": defaultInfos.testing,
             },
-            "engineers": defaultInfos.engineers,
+            "history": defaultInfos.history,
         }
