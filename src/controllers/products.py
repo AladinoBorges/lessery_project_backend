@@ -1,12 +1,10 @@
-from sqlalchemy import BigInteger
-
 from src.schemas.ProductBase import ProductReadSchema
 from src.services.products import ProductsService
 
 
 class ProductsController:
     def create(
-        external_url: str, api_name: str, user_id: BigInteger
+        external_url: str, api_name: str, user_id: int
     ) -> ProductReadSchema:
         new_product: ProductReadSchema = ProductsService.create(
             external_url, api_name, user_id
@@ -21,7 +19,7 @@ class ProductsController:
 
         return products
 
-    def find_by_id(product_id: BigInteger) -> ProductReadSchema:
+    def find_by_id(product_id: int) -> ProductReadSchema:
         product: ProductReadSchema = ProductsService.find_by_id(product_id)
 
         return product
@@ -45,7 +43,7 @@ class ProductsController:
 
         return products
 
-    def find_by_owner_id(owner_id: BigInteger) -> list[ProductReadSchema]:
+    def find_by_owner_id(owner_id: int) -> list[ProductReadSchema]:
         products: list[ProductReadSchema] = ProductsService.find_by_owner_id(
             owner_id
         )
