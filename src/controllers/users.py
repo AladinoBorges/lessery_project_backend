@@ -1,4 +1,4 @@
-from sqlalchemy import BigInteger
+from sqlalchemy.orm import Session
 
 from src.schemas.UserBase import UserCreateSchema, UserReadSchema
 from src.services.users import UsersService
@@ -10,8 +10,8 @@ class UsersController:
 
         return new_user
 
-    def find_by_id(user_id: BigInteger) -> UserReadSchema:
-        user: UserReadSchema = UsersService.find_by_id(user_id)
+    def find_by_id(user_id: int, database: Session) -> UserReadSchema:
+        user: UserReadSchema = UsersService.find_by_id(user_id, database)
 
         return user
 
@@ -20,14 +20,16 @@ class UsersController:
 
         return user
 
-    def find_all(skip: int, limit: int) -> list[UserReadSchema]:
-        users: UserReadSchema = UsersService.find_by_email(skip, limit)
+    def find_all(
+        skip: int, limit: int, database: Session
+    ) -> list[UserReadSchema]:
+        users: UserReadSchema = UsersService.find_all(skip, limit, database)
 
         return users
 
     """
     def update_user(
-      user_id: BigInteger, data: UpdateUserSchema
+      user_id: int, data: UpdateUserSchema
     ) -> UserReadSchema:
         user = UsersService.update(user_id, data)
 
@@ -35,7 +37,7 @@ class UsersController:
 
 
     def delete_user(
-      user_id: BigInteger, is_active: bool
+      user_id: int, is_active: bool
     ) -> UserDeleteSchema:
         user = UsersService.delete(user_id, active_status)
 
