@@ -5,7 +5,7 @@ from src.utilities.logs.handlers import LogsHandlers
 
 
 class ApiStatus:
-    router = APIRouter(tags=["API Status"], prefix="/api/v1/status")
+    router = APIRouter(tags=["API Status"], prefix="/v1/status")
 
     @router.get("/")
     def status(
