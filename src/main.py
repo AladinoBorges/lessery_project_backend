@@ -2,8 +2,8 @@ from fastapi import FastAPI
 
 from src.connections.engine import engine
 from src.models.base import Base
-from src.routers.ApiStatus import ApiStatus
-from src.routers.Users import UsersRouter
+from src.routers.status import ApiStatus
+from src.routers.users import UsersRouter
 from src.utilities.logs.handlers import LogsHandlers
 
 
