@@ -1,25 +1,18 @@
 from fastapi import FastAPI
 
-from src.api import status, users
+from src.api.status import status_router
+from src.api.users import users_router
 from src.connections.engine import engine
 from src.models.base import Base
-from src.utils.configurations.logging import (
-    database_connection_logger,
-    shutdown_event,
-    startup_event,
-)
+from src.utils.configurations.logging import shutdown_event, startup_event
 
 
 def create_application() -> FastAPI:
-    Base.metadata.create_all(engine)
+    Base.metadata.create_all(bind=engine)
 
     application = FastAPI()
-    application.include_router(
-        status.router, tags=["API Status"], prefix="/api/v1"
-    )
-    application.include_router(users.router, tags=["Users"], prefix="/api/v1")
-
-    database_connection_logger()
+    application.include_router(users_router)
+    application.include_router(status_router)
 
     return application
 
