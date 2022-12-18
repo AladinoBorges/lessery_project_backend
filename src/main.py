@@ -20,10 +20,6 @@ def create_application() -> FastAPI:
 
 app: FastAPI = create_application()
 
-""" @app.exception_handler(AppExceptionCase)
-def handle_exceptions(request, error):
-    return app_exception_handler(request, error) """
-
 
 @app.on_event("startup")
 def generate_startup_log() -> None:
