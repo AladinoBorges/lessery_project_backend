@@ -4,14 +4,14 @@ from src.classes.DefaultResponse import DefaultResponse
 from src.classes.SettingsClass import SettingsClass
 from src.utils.configurations.logging import get_settings
 
-router = APIRouter()
+status_router = APIRouter(tags=["API Status"], prefix="/api/v1/status")
 
 
 def settings_data() -> SettingsClass:
     return Depends(get_settings)
 
 
-@router.get("/status")
+@status_router.get("/")
 def ping(
     settings: SettingsClass = settings_data(),
 ) -> dict[str, int | bool | str | None | dict | list]:
@@ -26,7 +26,7 @@ def ping(
     return response.success
 
 
-@router.get("*")
+@status_router.get("/{*}")
 def not_found(
     settings: SettingsClass = settings_data(),
 ) -> dict[str, int | bool | str | None | dict | list]:
