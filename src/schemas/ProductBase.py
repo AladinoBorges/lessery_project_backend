@@ -1,5 +1,4 @@
 from pydantic import BaseModel as BaseSchema
-from sqlalchemy import BigInteger
 
 
 class ProductBaseSchema(BaseSchema):
@@ -15,10 +14,23 @@ class ProductCreateSchema(ProductBaseSchema):
     pass
 
 
-class ProductReadSchema(ProductBaseSchema):
-    id: BigInteger
-    owner_id: BigInteger
+class Product(ProductBaseSchema):
+    id: int
+    owner_id: int
     price_history: list[float]
 
     class Config:
         orm_mode: bool = True
+        arbitrary_types_allowed = True
+
+
+class ProductReadSchema(BaseSchema):
+    success: bool
+    status_code: int
+    data: Product
+
+
+class ProductsReadSchema(BaseSchema):
+    success: bool
+    status_code: int
+    data: list[Product]
