@@ -2,17 +2,17 @@ from fastapi import APIRouter, Depends
 
 from src.classes.DefaultResponse import DefaultResponse
 from src.classes.SettingsClass import SettingsClass
-from src.utils.config import get_settings
+from src.utils.configurations.logging import get_settings
 
-router = APIRouter()
+status_router = APIRouter(tags=["API Status"], prefix="/api/v1/status")
 
 
 def settings_data() -> SettingsClass:
     return Depends(get_settings)
 
 
-@router.get("/status")
-async def ping(
+@status_router.get("/")
+def ping(
     settings: SettingsClass = settings_data(),
 ) -> dict[str, int | bool | str | None | dict | list]:
     response = DefaultResponse(
@@ -26,13 +26,14 @@ async def ping(
     return response.success
 
 
-@router.get("*")
-async def not_found(
+@status_router.get("/{*}")
+def not_found(
     settings: SettingsClass = settings_data(),
 ) -> dict[str, int | bool | str | None | dict | list]:
     response = DefaultResponse(
         404,
         "ups! i did it again, 404.",
+        settings.version,
         settings.environment,
         settings.testing,
     )

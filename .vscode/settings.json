@@ -12,8 +12,10 @@
       "./sources"
     ],
     "cSpell.words": [
+      "autoflush",
       "fastapi",
       "LESSERY",
+      "middlewares",
       "mysql",
       "nullable",
       "pipenv",
@@ -21,6 +23,8 @@
       "pydantic",
       "pymysql",
       "sessionmaker",
+      "shopee",
+      "Shopee",
       "sqlalchemy",
       "sqlite",
       "uvicorn"
