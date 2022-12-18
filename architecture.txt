@@ -1,0 +1,52 @@
+├── .vscode
+│   └── settings.json
+├── src
+│   ├── connections: database engine
+│   │   ├── __init__.py
+│   │   └── engine.py
+│   ├── helpers: D.R.Y functions 
+│   │   ├── __init__.py
+│   │   └── ...
+│   ├── models: SQL Alchemy models for database modeling
+│   │   ├── __init__.py
+│   │   ├── Base.py
+│   │   ├── User.py
+│   │   ├── Product.py
+│   │   └── ...
+│   ├── routers: API routes
+│   │   ├── __init__.py
+│   │   ├── status.py (API connectivity status)
+│   │   ├── users.py
+│   │   ├── products.py
+│   │   └── ...
+│   ├── schemas: Pydantic schemas for response type annotations
+│   │   ├── ProductBase.py
+│   │   ├── UserBase.py
+│   │   └── ...
+│   ├── services: Business logic
+│   │   ├── __init__.py
+│   │   ├── Users.py
+│   │   ├── Products.py
+│   │   └── ...
+│   ├── utilities: services results, logging ...
+│   │   ├── __init__.py
+│   │   ├── logs
+│   │   │   ├── handlers.py
+│   │   │   └── ...
+│   │   ├── errors
+│   │   │   ├── handlers.py
+│   │   │   └── ...
+│   │   └── ...
+│   ├── __init__.py
+│   └── main.py
+├── .dockerignore
+├── .env
+├── .gitignore
+├── architecture.txt
+├── docker-compose.yml
+├── Dockerfile
+├── local-entrypoint.sh
+├── Pipfile
+├── Pipfile.lock
+├── README.md
+└── setup.cfg

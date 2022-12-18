@@ -1,50 +1,46 @@
-from sqlalchemy.orm import Session
+from fastapi import HTTPException
 
-from src.models.users import UsersModel
-from src.schemas.UserBase import UserCreateSchema, UserReadSchema
-from src.services.utils.default_response import response
+from src.helpers.emails import email_validation
+from src.schemas.UserBase import UserBaseSchema, UserReadSchema
 from src.services.utils.encoders import generate_hashed_password
+from src.utilities.errors.handlers import Exceptions
 
 
 class UsersService:
-    def create(user_data: UserCreateSchema) -> UserReadSchema:
-        hashed_password = generate_hashed_password(user_data.password)
-        updated_user_data = {**user_data, "password": hashed_password}
+    def create(user: UserBaseSchema, password: str) -> str | HTTPException:
+        if not email_validation(user.email):
+            return Exceptions.http("please, insert a valid email.", 400)
 
-        data = UsersModel.create(updated_user_data)
+        if not user.name or isinstance(user.name, int) or len(user.name) == 0:
+            return Exceptions.http("please, insert a valid name.", 400)
 
-        return response(data, "error creating a new user.", 404, 200)
+        if (
+            not user.last_name
+            or isinstance(user.last_name, int)
+            or len(user.last_name) == 0
+        ):
+            return Exceptions.http("please, insert a valid last name.", 400)
 
-    def find_all(
-        skip: int, limit: int, database: Session
-    ) -> list[UserReadSchema]:
-        data = UsersModel.find_all(skip, limit, database)
+        if not password or len(password) < 8:
+            message = (
+                "please, insert a valid password with"
+                + " a minimum of 8 characters."
+            )
 
-        return response(data, "users not found.", 404, 200)
+            return Exceptions.http(message, 400)
 
-    def find_by_id(user_id: int, database: Session) -> UserReadSchema:
-        data = UsersModel.find_by_id(user_id, database)
+        hashed_password = generate_hashed_password(password)
 
-        return response(data, "user not found.", 404, 200)
+        return hashed_password
 
-    def find_by_email(email: str) -> UserReadSchema:
-        data = UsersModel.find_by_email(email)
+    def find_by_id(user_id: int) -> UserReadSchema | HTTPException:
+        if not isinstance(user_id, int):
+            return Exceptions.http("user id needs to be an integer.", 400)
 
-        return response(data, "user not found.", 404, 200)
+        return user_id
 
-    """
-    def update(
-      user_id: int, data: UpdateUserSchema
-    ) -> UserReadSchema:
-        data = UsersModel.update(user_id, data)
+    def find_by_email(email: str) -> UserReadSchema | HTTPException:
+        if not email_validation(email):
+            return Exceptions.http("please, insert a valid email.", 400)
 
-        return response(data, "user not found.", 404, 200)
-
-
-    def delete(
-      user_id: int, is_active: bool
-    ) -> UserDeleteSchema:
-        user = UsersModel.delete(user_id, active_status)
-
-        return response(data, "user not found.", 404, 200)
-    """
+        return email
