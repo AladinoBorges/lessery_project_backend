@@ -43,11 +43,3 @@ class UsersModel:
         )
 
         return user
-
-    """
-    def update(
-        user_id: int, data: UserUpdateSchema
-    ) -> UserCreateSchema:
-
-    def delete(user_id: int, is_active: bool):
-    """
