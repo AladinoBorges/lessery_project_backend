@@ -3,11 +3,7 @@ from sqlalchemy.orm import Session
 
 from src.connections.Database import Database
 from src.models.users import UsersModel
-from src.schemas.UserBase import (
-    UserBaseSchema,
-    UserCreateSchema,
-    UserReadSchema,
-)
+from src.schemas.UserBase import UserCreateSchema, UserReadSchema
 from src.services.users import UsersService
 from src.utilities.errors.handlers import Exceptions
 from src.utilities.responses.handlers import Default
@@ -22,22 +18,22 @@ class UsersRouter:
 
     @router.post("/user", response_model=response_type)
     def create(
-        data: UserCreateSchema,
+        user_data: UserCreateSchema,
         database: Session = Depends(connection),
     ) -> UserCreateSchema | HTTPException:
-        user: UserBaseSchema = data.user
-        hashed_password: str = UsersService.create(user, data.password)
-
-        user_exists = UsersModel.find_by_email(user.email, database)
+        user_exists = UsersModel.find_by_email(user_data.email, database)
 
         if user_exists:
             message = (
                 "user already registered. please, "
                 + "use another email or try to login instead."
             )
+
             return Exceptions.http(message, 400)
 
-        new_user = UsersModel.create(user, hashed_password, database)
+        user_data.password = UsersService.create(user_data)
+
+        new_user = UsersModel.create(user_data, database)
 
         return Default.unique(new_user, "error creating a new user.", 404)
 
