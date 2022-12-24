@@ -7,8 +7,11 @@ class UserBaseSchema(BaseSchema):
     email: str
 
 
-class UserCreateSchema(BaseSchema):
-    user: UserBaseSchema
+class UserCreateHashedSchema(UserBaseSchema):
+    password: bytes
+
+
+class UserCreateSchema(UserBaseSchema):
     password: str
 
 
