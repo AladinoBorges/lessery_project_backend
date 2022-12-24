@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 
 from src.models.user import UserModel
 from src.schemas.UserBase import (
-    UserBaseSchema,
+    UserCreateHashedSchema,
     UserCreateSchema,
     UserReadSchema,
 )
@@ -10,13 +10,13 @@ from src.schemas.UserBase import (
 
 class UsersModel:
     def create(
-        user_data: UserBaseSchema, password: str, database: Session
+        user_data: UserCreateHashedSchema, database: Session
     ) -> UserReadSchema:
-        new_user: UserCreateSchema = UserModel(
+        new_user: UserCreateHashedSchema = UserModel(
             name=user_data.name,
             last_name=user_data.last_name,
             email=user_data.email,
-            password=password,
+            password=user_data.password,
         )
 
         database.add(new_user)
