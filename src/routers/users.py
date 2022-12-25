@@ -9,7 +9,6 @@ from src.schemas.UserBase import (
     UserUpdateSchema,
 )
 from src.services.users import UsersService
-from src.utilities.encryption.encoders import generate_hashed_password
 from src.utilities.errors.handlers import Exceptions
 from src.utilities.responses.handlers import Default
 
