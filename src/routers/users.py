@@ -3,7 +3,11 @@ from sqlalchemy.orm import Session
 
 from src.connections.Database import Database
 from src.models.users import UsersModel
-from src.schemas.UserBase import UserCreateSchema, UserReadSchema
+from src.schemas.UserBase import (
+    UserCreateSchema,
+    UserReadSchema,
+    UserUpdateSchema,
+)
 from src.services.users import UsersService
 from src.utilities.errors.handlers import Exceptions
 from src.utilities.responses.handlers import Default
@@ -66,3 +70,16 @@ class UsersRouter:
         user = UsersModel.find_by_id(valid_id, database)
 
         return Default.unique(user, "user not found.", 404)
+
+    @router.patch("/user/{id}", response_model=response_type)
+    def update(
+        id: int,
+        data: UserUpdateSchema,
+        database: Session = Depends(connection),
+    ) -> UserReadSchema | HTTPException:
+
+        validated_data = UsersService.update(id, data)
+
+        user = UsersModel.update(id, validated_data, database)
+
+        return user

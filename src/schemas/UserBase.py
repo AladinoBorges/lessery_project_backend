@@ -22,3 +22,12 @@ class UserReadSchema(UserBaseSchema):
 
     class Config:
         orm_mode: bool = True
+
+
+class UserUpdateSchema(BaseSchema):
+    name: str = None
+    last_name: str = None
+    email: str = None
+    password: str | bytes = None
+    is_active: bool = None
+    verified: bool = None
