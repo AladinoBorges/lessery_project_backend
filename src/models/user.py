@@ -1,4 +1,4 @@
-from sqlalchemy import BigInteger, Boolean, Column, String
+from sqlalchemy import BigInteger, Boolean, Column, LargeBinary, String
 
 from src.models.base import Base
 
@@ -13,4 +13,4 @@ class UserModel(Base):
     name = Column(String(30), nullable=False)
     last_name = Column(String(30), nullable=False)
     email = Column(String(200), nullable=False, unique=True)
-    password = Column(String(32), nullable=False)
+    password = Column(LargeBinary(255), nullable=False)
