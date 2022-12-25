@@ -1,6 +1,6 @@
 from fastapi import HTTPException
 
-from src.schemas.UserBase import UserCreateSchema
+from src.schemas.UserBase import UserCreateSchema, UserUpdateSchema
 from src.services.utils.users.validations import Validate
 from src.utilities.encryption.encoders import generate_hashed_password
 from src.utilities.errors.handlers import Exceptions
@@ -31,3 +31,20 @@ class UsersService:
 
     def find_by_email(email: str) -> str | HTTPException:
         return Validate.email(email)
+
+    def update(
+        user_id: int, data: UserUpdateSchema
+    ) -> UserUpdateSchema | HTTPException:
+        if data.password:
+            data.password = generate_hashed_password(data.password)
+
+        if data.email:
+            Validate.email(data.email)
+
+        if data.name:
+            Validate.name(data.name)
+
+        if data.last_name:
+            Validate.lastname(data.last_name)
+
+        return data
